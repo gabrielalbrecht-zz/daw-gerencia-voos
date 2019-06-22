@@ -1,6 +1,7 @@
 package br.edu.ifsul.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -55,48 +56,56 @@ public class Passagem implements Serializable {
 		this.dataCompra = Calendar.getInstance();
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Calendar getDataCompra() {
-		return dataCompra;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Passagem other = (Passagem) obj;
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		return true;
 	}
 
 	public Integer getBagagem() {
 		return bagagem;
 	}
 
-	public void setBagagem(Integer bagagem) {
-		this.bagagem = bagagem;
+	public Classe getClasse() {
+		return classe;
 	}
 
-	public VooAgendado getVooAgendado() {
-		return vooAgendado;
+	public Calendar getDataCompra() {
+		return dataCompra;
 	}
 
-	public void setVooAgendado(VooAgendado vooAgendado) {
-		this.vooAgendado = vooAgendado;
+	public String getDataCompraAsString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String dataString = sdf.format(dataCompra.getTime());
+		return dataString;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	public Classe getClasse() {
-		return classe;
-	}
-
-	public void setClasse(Classe classe) {
-		this.classe = classe;
+	public VooAgendado getVooAgendado() {
+		return vooAgendado;
 	}
 
 	@Override
@@ -107,21 +116,24 @@ public class Passagem implements Serializable {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Passagem other = (Passagem) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public void setBagagem(Integer bagagem) {
+		this.bagagem = bagagem;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public void setVooAgendado(VooAgendado vooAgendado) {
+		this.vooAgendado = vooAgendado;
 	}
 
 	@Override

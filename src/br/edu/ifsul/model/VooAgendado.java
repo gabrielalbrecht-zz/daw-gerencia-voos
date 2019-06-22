@@ -60,44 +60,57 @@ public class VooAgendado implements Serializable {
 
 	}
 
-	public Integer getId() {
-		return id;
+	public void adicionarPassagem(Passagem p) {
+		passagens.add(p);
+		p.setVooAgendado(this);
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		VooAgendado other = (VooAgendado) obj;
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		return true;
 	}
 
 	public String getAeronave() {
 		return aeronave;
 	}
 
-	public void setAeronave(String aeronave) {
-		this.aeronave = aeronave;
+	public Calendar getData() {
+		return data;
+	}
+
+	public String getDataAsString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String dataString = sdf.format(data.getTime());
+		return dataString;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public Integer getTotalPassageiros() {
 		return totalPassageiros;
 	}
 
-	public void setTotalPassageiros(Integer totalPassageiros) {
-		this.totalPassageiros = totalPassageiros;
-	}
-
-	public Calendar getData() {
-		return data;
-	}
-
-	public void setData(Calendar data) {
-		this.data = data;
-	}
-
 	public Voo getVoo() {
 		return voo;
-	}
-
-	public void setVoo(Voo voo) {
-		this.voo = voo;
 	}
 
 	@Override
@@ -108,34 +121,32 @@ public class VooAgendado implements Serializable {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		VooAgendado other = (VooAgendado) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	public void adicionarPassagem(Passagem p) {
-		passagens.add(p);
-		p.setVooAgendado(this);
+	public void removerPassagem(int index) {
+		passagens.remove(index);
 	}
 
 	public void removerPassagem(Passagem p) {
 		passagens.remove(p);
 	}
 
-	public void removerPassagem(int index) {
-		passagens.remove(index);
+	public void setAeronave(String aeronave) {
+		this.aeronave = aeronave;
+	}
+
+	public void setData(Calendar data) {
+		this.data = data;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setTotalPassageiros(Integer totalPassageiros) {
+		this.totalPassageiros = totalPassageiros;
+	}
+
+	public void setVoo(Voo voo) {
+		this.voo = voo;
 	}
 
 	@Override

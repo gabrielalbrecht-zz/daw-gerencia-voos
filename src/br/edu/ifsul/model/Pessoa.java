@@ -39,7 +39,7 @@ public class Pessoa implements Serializable {
 	private String email;
 
 	@NotBlank(message = "Campo telefone é obrigatório.")
-	@Length(max = 11, min = 11, message = "O telefone deve conter 11 caracteres.")
+	@Length(max = 14, min = 14, message = "O telefone deve conter 11 caracteres.")
 	@Column(name = "telefone", nullable = false, length = 30)
 	private String telefone;
 
@@ -47,44 +47,46 @@ public class Pessoa implements Serializable {
 
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Pessoa other = (Pessoa) obj;
+		if (id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		return true;
 	}
 
 	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public Integer getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
 	}
 
 	public String getTelefone() {
 		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
 	}
 
 	@Override
@@ -95,26 +97,29 @@ public class Pessoa implements Serializable {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	@Override
 	public String toString() {
-		return nome;
+		return nome.concat(" - ").concat(cpf);
 	}
 
 }
